@@ -1,16 +1,16 @@
 <h1 class="mt-3"><%= @place["name"] %></h1>
 
-<p>
-<% if @current_user != nil %>
-  <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-success">New Post</a>
-<% end %>
-</p>
+<a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-success">New Post</a>
+<p></p>
 
 <div class="row">
   <% for entry in @entries %>
     <div class = "col-sm-6 col-md-3">
       <h4><%= entry["title"] %></h4>
       <p><%= entry["occurred_on"] %></p>
+      <% if entry.uploaded_image.attached? %>
+        <img src="<%= url_for(entry.uploaded_image) %>" class="img-fluid border">
+      <% end%>
       <p><%= entry["description"]%></p>
     </div>      
   <% end %>
